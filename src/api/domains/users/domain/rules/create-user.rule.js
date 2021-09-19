@@ -3,8 +3,6 @@ const {
 } = require('../../../../../resources/validators/email.validator');
 
 function createUserRule(user) {
-  console.log('validate new user', user);
-
   if (!user.name || !user.email || !user.password) {
     return false;
   }
