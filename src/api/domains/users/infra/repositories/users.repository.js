@@ -27,6 +27,16 @@ async function createUser(user) {
     .then((result) => result.ops[0])
     .catch(handleCreateUserError);
 }
+
+async function getUserByEmail(email) {
+  const users = await getCollection();
+  const result = await users.find({ email }).toArray();
+
+  if (!result || result.length === 0) {
+    return null;
+  }
+
+  return result[0];
 }
 
 async function createIndexes() {
@@ -34,4 +44,4 @@ async function createIndexes() {
   return users.createIndex({ email: 1 }, { unique: true });
 }
 
-module.exports = { createUser, createIndexes };
+module.exports = { createUser, getUserByEmail, createIndexes };
